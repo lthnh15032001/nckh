@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}\usepackage[left=2.50cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\begin{document}
+\section{DNS là gì}
+DNS, hoặc Hệ thống tên miền, dịch các tên miền có thể đọc được của con người (ví dụ: www.amazon.com) thành địa chỉ IP có thể đọc được của máy (ví dụ: 192.0.2.44).\\
+
+\noindent Tất cả các máy tính trên Internet, từ điện thoại thông minh hoặc máy tính xách tay của bạn đến các máy chủ cung cấp nội dung cho các trang web bán lẻ lớn, tìm và giao tiếp với nhau bằng cách sử dụng số. Những số này được gọi là địa chỉ IP . Khi bạn mở trình duyệt web và truy cập vào một trang web, bạn không cần phải nhớ và nhập một số dài. Thay vào đó, bạn có thể nhập một tên miền như example.com và cuối cùng vẫn ở đúng nơi.\\
+
+\noindent Dịch vụ DNS, chẳng hạn như Amazon Route 53 là một dịch vụ được phân phối toàn cầu, dịch các tên có thể đọc được của con người như www.example.com thành các địa chỉ IP dạng số như 192.0.2.1 mà các máy tính sử dụng để kết nối với nhau. Hệ thống DNS của Internet hoạt động giống như một danh bạ điện thoại bằng cách quản lý ánh xạ giữa tên và số. Máy chủ DNS dịch các yêu cầu tên thành địa chỉ IP, kiểm soát máy chủ mà người dùng cuối sẽ truy cập khi họ nhập tên miền vào trình duyệt web của họ. Những yêu cầu này được gọi là truy vấn .
+
+\section{Giao thức DNS là gì}
+Giao thức Hệ thống mạng miền (DNS) giúp người dùng Internet và thiết bị mạng khám phá các trang web sử dụng tên máy chủ có thể đọc được của con người, thay vì địa chỉ IP dạng số.\\
+\textbf{8 bước trong tra cứu DNS:} \\
+\begin{enumerate}
+    \item Một trình duyệt, ứng dụng hoặc thiết bị được gọi là máy khách DNS , đưa ra yêu cầu DNS hoặc tra cứu địa chỉ DNS , cung cấp tên máy chủ như “example.com”.
+    \item Yêu cầu được nhận bởi trình phân giải DNS , trình phân giải này chịu trách nhiệm tìm địa chỉ IP chính xác cho tên máy chủ đó. Trình phân giải DNS tìm kiếm máy chủ định danh DNS giữ địa chỉ IP cho tên máy chủ trong yêu cầu DNS.
+    \item Trình phân giải bắt đầu từ máy chủ DNS gốc của Internet , di chuyển xuống phân cấp đến máy chủ DNS Tên miền cấp cao nhất (TLD) (trong trường hợp này là “.com”), xuống máy chủ định danh chịu trách nhiệm cho miền cụ thể “example.com”.
+    \item Khi trình phân giải đến máy chủ định danh DNS có thẩm quyền cho “example.com”, trình phân giải sẽ nhận được địa chỉ IP và các chi tiết liên quan khác và trả về máy khách DNS. Yêu cầu DNS hiện đã được giải quyết .
+    \item Thiết bị máy khách DNS có thể kết nối trực tiếp với máy chủ bằng địa chỉ IP chính xác.
+    
+\end{enumerate}
+\section{Các loại truy vấn DNS.}
+    Cấu trúc của cả truy vấn DNS và phản hồi DNS đều giống nhau và bao gồm:
+\begin{itemize}
+    \item ID giao dịch liên kết một truy vấn với phản hồi liên quan của nó.
+    \item Phần cờ (chỉ hai tham số đầu tiên được thảo luận ở đây, các tham số khác sẽ được thảo luận trong một bài viết khác về DNS).
+    \begin{itemize}
+        \item Bit đầu tiên xác định truy vấn (giá trị = 0) hoặc phản hồi (giá trị = 1).
+        \item Opcode (4 bit) xác định loại truy vấn (thường là 0000 để chỉ ra một truy vấn DNS tiêu chuẩn).
+    \end{itemize}
+    \item 4 tham số theo phần cờ:
+    \begin{itemize}
+        \item Câu hỏi: giá trị cung cấp số lượng yêu cầu được gửi trong phân đoạn truy vấn DNS.
+        \item Trả lời RRs / Quyền hạn RRs / RRs bổ sung: RR là viết tắt của Bản ghi tài nguyên. Các tham số này sẽ được thảo luận trong một bài viết khác về DNS.
+    \end{itemize}
+    \item Bản thân truy vấn, được xác định theo kiểu của nó. Có rất nhiều loại truy vấn DNS. Đây là những cái chính:
+    \begin{itemize}
+        \item Nhập “A” cho địa chỉ IPv4.
+        \item Nhập “AAAA” cho địa chỉ IPv6.
+        \item Gõ “CNAME” (Canonical Names) - chỉ định một tên miền phải được truy vấn để giải quyết truy vấn DNS ban đầu.
+        \item Nhập “PTR” (Con trỏ) đã chỉ định một truy vấn ngược (yêu cầu FQDN -  Tên miền Đủ điều kiện  - tương ứng với địa chỉ IP bạn đã cung cấp).
+        \item Nhập “NS” (Máy chủ định danh) để nhận thông tin về máy chủ định danh có thẩm quyền.
+        \item Gõ “SOA” (Start Of zone Authority): được sử dụng khi chuyển vùng.
+        \item Nhập “MX” (Mail eXchange) để yêu cầu thông tin về máy chủ trao đổi thư cho một tên miền DNS cụ thể.\\
+        Khi phân tích hiệu suất DNS, bước đầu tiên là xác định tất cả các loại truy vấn DNS tồn tại trong cơ sở hạ tầng của bạn.
+        
+    \end{itemize}
+    \item Phản hồi (tất nhiên chỉ trong gói phản hồi)
+\end{itemize}
+\end{document}

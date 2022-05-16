@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}
+\begin{document}
+
+
+\begin{abstract}
+    DNS đóng một vai trò hết sức quan trọng trong tổng thể cấu trúc của Internet. Một lỗi DNS sẽ làm cho hệ thống không thể truy cập được đối với hầu hết người dùng Internet. Trong những năm qua, một số cuộc tấn công đã được thực hiện trên DNS và cơ sở hạ tầng DNS cũng đã bị khai thác để thực hiện các cuộc tấn công quy mô lớn. Trong bài viết này chúng ta sẽ tìm hiểu về tấn công Remote DNS Cache Poisoning, một trong những cách tấn có trên cơ sở hạ tầng DNS và cách chúng đã khai thác cơ sở hạ tầng đó. Và một số biện pháp ngăn ngừa cuộc tấn công này.
+\end{abstract}
+\section{Introduction}
+DNS là viết tắt cụm từ Domain Name System, mang ý nghĩa đầy đủ là hệ thống phân giải tên miền, hay là một hệ thống chuyển đổi các tên miền dạng \textit{www.tenmien.com} sang một địa chỉ IP dạng số tương ứng với tên miền đó và ngược lại.
+
+\begin{figure} [!htp]
+    \centering
+    \includegraphics[scale=0.5]{Image/DNS-la-gi-mat-bao-2.png}
+    \caption{Hệ thống phân giải tên miền - DNS}
+\end{figure}
+
+Trước khi có DNS, có một hệ thống trung tâm duy trì tệp HOST.TXT, ở đó chúng lưu trữ tên máy chủ và địa chỉ IP mà chúng ánh xạ tới, được quản lí và duy trì bởi NIC Starnford Research Institute (SRI). Do sự phát triển nhanh chóng của các trang web mà tệp này trở lên quá cồng kềnh và sự giới hạn của hệ thống trung tâm có thể nhìn thấy. Dó đó cần có một số giải pháp thay thế là điều cần thiết.
+
+Năm 1983 thiết kế hệ thống RFC 882 và RFC 883 được Paul Mockapetris đưa ra và sau đó đến năm 1987 chuẩn tương ứng được công khai trong RFC 1034 và RFC 1035 được coi như là nền tảng của DNS. DNS là một dịch vụ quan trọng, và nó thường xuyên là mục tiêu cho rất nhiều cuộc tấn công. Giao thức DNS được thiết kể với mức bảo vệ tối thiểu. Vì vậy trong khoảng  thời gian qua đã có một vài lỗ hổng giao thức DNS được tìm ra.
+
+\section{Kaminsky attack introduction}
+Năm 2008, nhà nghiên cứu bảo mật nổi tiếng Dan Kaminsky đã tìm ra và tiết lộ một lỗ hổng cơ bản trong sơ đồ đặt tên trên Internet có thể ảnh hưởng đến hầu hết các phần mềm DNS và tính toàn vẹn của cách thức hoạt động cả Internet vào thời điểm đó.
+
+Kaminsky đã chỉ ra rằng người tấn công có thể mạo danh bất kỳ tên trang web nào và đánh cắp dữ liệu.
+
+DNS đã được coi như là một giao thức có phần không an toàn trong nhiều thập kỷ, kể từ khi Kaminsky tiết lộ và thậm chí trước đó. mặc dù nó được cho là đảm bảo một mức độ toàn vẹn nhất định. Đây là lý do tại sao nó vẫn còn phụ thuộc rất nhiều. Đồng thời, các cơ chế đã được phát triển để cải thiện tính bảo mật của giao thức DNS gốc. Các cơ chế này bao gồm HTTPS, HSTS, DNSSEC và các sáng kiến khác. Các trình duyệt cũng cố gắng nâng cao nhận thức của người dùng bằng cách cảnh báo họ trước khi truy cập các trang web không an toàn bằng các thông báo như "Your Connection is Not Private"
+
+Tuy nhiên, ngay cả khi có tất cả các cơ chế trên, một cuộc tấn công DNS vẫn là một cuộc tấn công nguy hiểm cho đến ngày nay. Một phần lớn Internet vẫn dựa vào DNS theo cách tương tự như năm 2008 và bị phơi nhiễm bởi các cuộc tấn công tương tự.
+
+\end{document}

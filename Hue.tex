@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[left=2.50cm, right=2.00cm, top=3.00cm, bottom=3.00cm]{geometry}
+\begin{document}
+\section{Phân loại máy chủ DNS}
+Có 4 loại máy chủ DNS
+\subsection{Root Name Servers}
+Cũng thường được gọi là Name Server. Đây là Server quan trọng nhất trong hệ thống cấp bậc của DNS. Bạn cũng có thể hiểu rằng, Root Name Server chính là một thư viện để định hướng tìm kiếm giúp bạn.\\
+Theo quy trình thực tế, sau khi nhận yêu cầu từ DNS Recursive Resolver, Root Name Server sẽ phản hồi rằng nó cần tìm trong các top-level domain name servers ( TLD Name Servers ) cụ thể nào.
+\subsection{DNS Recursor}
+Như đã nhắc đến ở trên, “cạ cứng” này đóng vai trò như một nhân viên cần mẫn, nhận nhiệm vụ lấy và trả thông tin về cho trình duyệt để tìm đúng thông tin mà chúng cần. Nói cách khác, DNS Recursor giữ trách nhiệm liên lạc với các Server khác để phản hồi đến trình duyệt người dùng. Tất nhiên là trong quá trình lấy thông tin, đôi khi nó cũng sẽ cần đến sự giúp đỡ của Root DNS Server.
+\subsection{TLD Nameserver}
+Khi bạn muốn truy cập Google hay Facebook, thường, phần mở rộng của bạn sẽ là “.com” đúng không? Vậy tôi muốn bạn biết rằng, nó chính là một trong các Top-level Domain đấy. Và Server cho loại Top-level domain này gọi là TLD Nameserver. Đây là nhà quản lý toàn bộ hệ thống thông tin của một phần mở rộng tên miền chung.\\
+Theo trình tự, TLD Name Server sẽ phản hồi từ DNS Resolver, sau đó giới thiệu nó cho một Authoritative DNS Server – hay nơi chứa chính thức nguồn dữ liệu của tên miền đó.
+\subsection{Authoritative Nameserver}
+Khi DNS Resolver tìm thấy Authoritative Nameserver, đó là lúc mà việc phân giải tên miền diễn ra. Mặt khác, Authoritative Name Server có chứa thông tin cho biết tên miền đang gắn với địa chỉ nào. Nó sẽ cung cấp cho Recursive Resolver địa chỉ IP cần thiết tìm thấy trong danh mục những bản ghi của nó.
+\section{Cách hoạt động của DNS}
+Quá trình phân giải DNS bao gồm việc chuyển đổi máy chủ(chẳng hạn như www.example.com) thành địa chỉ IP liên kết với máy tính(như 192.168.11). Địa chỉ IP được cấp trên mỗi thiết bị Internet thích hợp, cũng giống như địa chỉ đường phố được sử dụng để tìm số nhà cụ thể.\\
+
+\noindent Khi người dùng muốn tải một trang web, bản dịch phải xảy ra giữa thông tin với người dùng ngập vào trình duyệt web của họ(example.com) và địa chỉ liên kết với máy cần thiết để dịnh vị trang web.\\
+
+\noindentĐể hiểu quy trình đằng sau quá trình phân giải DNS, điều quan trọng là phải tìm hiểu về các thành phần cứng khác nhau mà truy vấn ra ở chế độ "ẩn" và không yêu cầu tương tác từ máy tính của người dùng ngoài yêu câu ban đầu.\\
+
+\noindentĐối với hầu hết các trường hợp, DNS liên quan đến việc một tên miền được dịch sang địa chỉ IP thích hợp. Để tìm hiểu cách thức hoạt động của quy trình này, hãy thực hiện theo đường dẫn của tra cứu DNS khi nó di chuyển từ trình duyệt web, thông qua quy trình tra cứu DNS và quay lại lần nữa. Chúng ta hãy xem xét các bước.\\
+\\
+\\
+\\
+\begin{figure}[ht]
+
+\begin{center}
+
+\includegraphics[scale=0.8]{hinh1}\\
+
+\end{center}
+
+\caption{Sơ đồ hoàn thành tra cứu DNS và truy vấn trang web}
+
+\end{figure}
+\textbf{8 bước trong tra cứu DNS:} \\
+\begin{enumerate}
+    \item Người dùng nhập ‘example.com’ vào trình duyệt web và truy vấn sẽ truyền vào Internet và được nhận bởi trình phân giải đệ quy DNS.
+    \item Trình phân giải sẽ truy vấn một máy chủ định danh gốc DNS (.).
+    \item Máy chủ gốc phản hồi trình phân giải bằng địa chỉ của máy chủ DNS Tên miền Cấp cao nhất (TLD) (chẳng hạn như .com hoặc .net), máy chủ này lưu trữ thông tin cho các miền của nó. Khi tìm kiếm example.com, yêu cầu của chúng tôi được hướng tới TLD .com.
+    \item Trình phân giải đưa ra yêu cầu tới .com TLD.
+    \item Máy chủ TLD sẽ phản hồi bằng địa chỉ IP của máy chủ định danh của miền, example.com.
+    \item Trình phân giải đệ quy gửi một truy vấn đến máy chủ định danh của miền.
+    \item Địa chỉ IP cho example.com sau đó được trả về trình phân giải từ máy chủ định danh.
+    \item Trình phân giải DNS sẽ phản hồi lại trình duyệt web bằng địa chỉ IP của miền được yêu cầu ban đầu.\\
+    
+    Sau khi 8 bước tra cứu DNS đã trả lại địa chỉ IP cho example.com, trình duyệt có thể thực hiện yêu cầu cho trang web:
+    \item Trình duyệt thực hiện một yêu cầu HTTP đến địa chỉ IP.
+    \item Máy chủ tại IP đó trả về trang web sẽ được hiển thị trong trình duyệt (bước 10).
+\end{enumerate}
+
+\end{document}
